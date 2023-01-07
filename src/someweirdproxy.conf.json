@@ -1,0 +1,7 @@
+{
+  "/xmlapi2": {
+    "target": "http://localhost:3128",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
