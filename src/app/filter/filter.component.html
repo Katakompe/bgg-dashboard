@@ -1,0 +1,15 @@
+<div class="filterview">
+  <mat-form-field class="searchfield">
+    <mat-label>Title</mat-label>
+    <input matInput type="text" placeholder="Title" [ngModel]="searchWord"
+      (ngModelChange)="updateSearchWord($event)"
+    >
+  </mat-form-field>
+
+  <mat-form-field class="searchfield">
+    <mat-label>Best Player Count</mat-label>
+    <input matInput type="number" [ngModel]="bestPlayerCount"
+      (ngModelChange)="updateBestPlayerCount($event)"
+    >
+  </mat-form-field>
+</div>

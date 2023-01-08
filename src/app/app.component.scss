@@ -1,0 +1,30 @@
+.gametable {
+  margin: 0 1em;
+}
+
+.thumbnail-image {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.thumbnail-cell {
+  padding: 5px 0 5px 0em;
+  justify-content: center;
+
+}
+
+boardgame-table {
+  background-color: "green";
+}
+
+.playercell {
+  flex-direction: column
+}
+
+.header-line {
+  margin: 8px;
+}
+
+.filter {
+  margin: 8px 0;
+}

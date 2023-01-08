@@ -8,6 +8,7 @@ export class RetryInterceptor implements HttpInterceptor {
   constructor() {}
 
   shouldRetry(error: HttpErrorResponse) {
+    console.warn("error: " + error.status)
     if (error.status >= 300) {
       throw error;
     }
@@ -20,6 +21,7 @@ export class RetryInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       map((response: HttpEvent<unknown>) => {
+        console.log("Status: " + (response as HttpResponse<unknown>).status)
         if ((response as HttpResponse<unknown>).status === 202) {
           throw 202;
         }

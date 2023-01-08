@@ -22,6 +22,8 @@ export interface BoardGame {
   recommendedPlayers: PlayerPoll;
   recommendedAge: AgePoll;
   languageDependence: LanguagePoll;
+  rating: number,
+  complexity: number
 }
 
 export interface PlayerPoll {
@@ -97,7 +99,9 @@ function toBoardGame(item: any): BoardGame {
     publicationYear: item.yearpublished["@value"],
     recommendedPlayers: toPlayerPoll(item.poll.find((v: any) => v["@name"] === PollType.PLAYERCOUNT)),
     recommendedAge: toAgePoll(item.poll.find((v: any) => v["@name"] === PollType.PLAYERAGE)),
-    languageDependence: toLanguagePoll(item.poll.find((v: any) => v["@name"] === PollType.LANGUAGEDEPENDENCE))
+    languageDependence: toLanguagePoll(item.poll.find((v: any) => v["@name"] === PollType.LANGUAGEDEPENDENCE)),
+    rating: item.statistics.ratings.average["@value"],
+    complexity: item.statistics.ratings.averageweight["@value"]
   }
 }
 

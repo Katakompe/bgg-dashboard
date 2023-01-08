@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { fromXML } from 'from-xml';
+import { BoardGame, toBoardGames } from './model/BggModels';
 
 @Injectable({ providedIn: 'root' })
 export class BggService {
@@ -22,18 +23,18 @@ export class BggService {
       );
   }
 
-
-
-  public getBoardgame(objectId: string) {
+  public getBoardgame(objectId: string): Observable<BoardGame[]> {
     return this.httpClient.get(
-      this.baseUrl + "/thing" + `?id=${objectId}`,
+      this.baseUrl + "/thing" + `?id=${objectId}&stats=1`,
       {
         observe: 'response',
         responseType: 'text'
       }
     )
       .pipe(
-        map(xmlResponse => fromXML(xmlResponse.body || ""))
+        map(xmlResponse => fromXML(xmlResponse.body || "")),
+        map(response => toBoardGames(response)),
+        tap(response => console.log("Got response: ", response))
       );
   }
 
