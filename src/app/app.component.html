@@ -3,7 +3,7 @@
   <mat-card class="header-card">
     <mat-card-content>
       <div class="header-line mat-headline-3">
-        Collection of {{username}}
+        Sammlung von {{username}}
       </div>
 
       <div class="user-header-line align-items-stretch">
@@ -12,7 +12,7 @@
           <mat-label>Change User</mat-label>
           <input matInput type="text" placeholder="Username" formControlName="usernameFormControl"/>
         </mat-form-field>
-        <button class="submit-button"mat-raised-button color="primary" type="submit">Update</button>
+        <button class="submit-button"mat-raised-button color="primary" type="submit">Aktualisieren</button>
       </form>
       </div>
 
@@ -84,6 +84,9 @@
         <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
           <mat-progress-spinner color="primary" mode="indeterminate">
           </mat-progress-spinner>
+        </div>
+        <div *ngIf="isInitial" style="margin: 16px; display: flex; justify-content: center; align-items: center; background: white;">
+          <p class="mat-h2">Bitte wähle einen BoardGameGeek-Usernamen um die Sammlung anzuzeigen.</p>
         </div>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 200]" showFirstLastButtons aria-label="Select page of games">

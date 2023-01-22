@@ -20,25 +20,31 @@ export class AppComponent implements OnInit, AfterViewInit {
   private col: any;
 
 
-  username = "Katakompe";
+  username = "";
   usernameFormControlGroup = new FormGroup({
-    usernameFormControl: new FormControl('Katakompe')
+    usernameFormControl: new FormControl('')
   });
 
+
   filterFn: (b: BoardGame[]) => BoardGame[] = (b: BoardGame[]) => b;
-  sortingFn: (a: BoardGame,b: BoardGame) => number = (a,b) => 0;
+  sortingFn: (a: BoardGame, b: BoardGame) => number = (a, b) => 0;
 
   boardgames: BoardGame[] = [];
   displayedColumns: string[] = ['thumbnailImage', 'id', 'name', 'players', 'playtime', 'publicationYear', "rating", "complexity"];
   dataSource: MatTableDataSource<BoardGame> = new MatTableDataSource<BoardGame>([])
   isLoading = true
+  isInitial = true
   @ViewChild(MatPaginator) paginator: any;
 
 
   constructor(private bggService: BggService) { };
 
   ngOnInit() {
-    this.updateCollection()
+    if (this.username !== "") {
+      this.updateCollection()
+    } else {
+      this.isLoading = false;
+    }
   }
 
   ngAfterViewInit() {
@@ -52,6 +58,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   //TODO Make sure sorting and filtering works together and does not reset each other, also make sure that sorting is resettable
   updateCollection() {
+    this.isInitial = false
     this.username = this.usernameFormControlGroup.value!.usernameFormControl!;
     this.dataSource.data = [];
     this.isLoading = true;
@@ -77,7 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   sortGames(sortState: Sort) {
     if (!sortState.active || sortState.direction === '') {
-      this.sortingFn = (a,b) => 0;
+      this.sortingFn = (a, b) => 0;
       return;
     }
     this.sortingFn = (a: BoardGame, b: BoardGame) => {
