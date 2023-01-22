@@ -22,6 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
@@ -29,4 +31,4 @@ jobs:
 #    - run: npm run test
     - run: npm install
     - run: npm run prodBuild
-    - run: npm run deploy
+    - run: npm run ng -- deploy --base-href=/bgg-dashboard/ --name="Sebastian K" --email="23136132+Katakompe@users.noreply.github.com"
