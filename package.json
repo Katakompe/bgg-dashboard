@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prodBuild": "ng build --base-href /bgg-dashboard/",
-    "deploy": "ng deploy --no-silent --base-href=/bgg-dashboard/ --name=Katakompe --email=23136132+Katakompe@users.noreply.github.com"
+    "deploy": "ng deploy --no-silent --base-href=/bgg-dashboard/"
   },
   "private": true,
   "dependencies": {
