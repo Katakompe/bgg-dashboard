@@ -18,7 +18,7 @@ jobs:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    environment: Deployment
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -33,7 +33,7 @@ jobs:
     - name: App deployment
       uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.3.2 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
       with:
-        github_access_token: ${{ secrets.ACCESS_TOKEN }}
+        github_access_token: ${{ vars.DEPLOY_ACCESS_TOKEN }}
         build_configuration: production # The build environment for the app. please look configurations in your angular.json
         base_href: /bgg-dashboard/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
         deploy_branch: gh-pages # The branch the action should deploy to.
