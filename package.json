@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prodBuild": "ng build  --base-href /bgg-dashboard/",
+    "deploy": "angular-cli-ghpages -d dist/bgg-dashboard/ --no-silent"
   },
   "private": true,
   "dependencies": {
