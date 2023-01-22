@@ -38,20 +38,3 @@ jobs:
         base_href: /bgg-dashboard/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
         deploy_branch: gh-pages # The branch the action should deploy to.
         angular_dist_build_folder: dist/bgg-dashboard # The folder where your project is supposed to be after running ng build by the action.
-
-
-
-
-
-
-name: Build and Deploy
-on:
-  push:
-    branches:
-      - master
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
