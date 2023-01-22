@@ -1,3 +1,5 @@
+import { isFormArray } from "@angular/forms";
+
 export interface Collection {
   items: Item[];
 }
@@ -112,6 +114,21 @@ export enum PollType {
 }
 
 function toPlayerPoll(value: any): PlayerPoll {
+  if(!Array.isArray(value.results)) {
+    return {
+      title: value["@title"],
+      totalVotes: value["@totalvotes"],
+      option: [{
+        playerCount: value.results["@numplayers"],
+        votes: [
+          {
+          type: PlayerCountOptionResultType.BEST,
+          votes: 0
+        }
+      ]
+    }]
+    }
+  }
   return {
     title: value["@title"],
     totalVotes: value["@totalvotes"],
@@ -134,7 +151,7 @@ function toAgePoll(value: any): AgePoll {
   return {
     title: value["@title"],
     totalVotes: value["@totalvotes"],
-    option: value.results?.result.map((opt: any) => {
+    option: value.results?.result?.map((opt: any) => {
       return {
         age: opt["@value"],
         votes: parseInt(opt["@numvotes"])
@@ -147,7 +164,7 @@ function toLanguagePoll(value: any): LanguagePoll {
   return {
     title: value["@title"],
     totalVotes: value["@totalvotes"],
-    option: value.results.result.map((opt: any) => {
+    option: value.results?.result?.map((opt: any) => {
       return {
         level: opt["@level"],
         description: opt["@value"],

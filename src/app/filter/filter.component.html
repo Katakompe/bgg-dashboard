@@ -12,4 +12,50 @@
       (ngModelChange)="updateBestPlayerCount($event)"
     >
   </mat-form-field>
+
+  <mat-form-field class="searchfield">
+    <mat-label>Player Count (any)</mat-label>
+    <input matInput type="number" [ngModel]="anyPlayerCount"
+      (ngModelChange)="updateAnyPlayerCount($event)"
+    >
+  </mat-form-field>
+
+
+  <mat-form-field class="searchfield">
+    <mat-label>Max. Complexity</mat-label>
+    <input matInput type="number" [ngModel]="maxComplexity">
+      <!-- (ngModelChange)="updateComplexity($event)" -->
+  </mat-form-field>
+
+  <mat-form-field class="searchfield">
+    <mat-label>Min. Rating</mat-label>
+    <input matInput type="number" [ngModel]="minRating">
+  </mat-form-field>
+  <!--
+
+    TODO: Implement
+
+  <mat-form-field class="searchfield">
+    <mat-label>Max. Rating</mat-label>
+    <input matInput type="number" [ngModel]="maxRating">
+  </mat-form-field>
+
+  <mat-form-field class="searchfield">
+    <mat-label>Min. Complexity</mat-label>
+    <input matInput type="number" [ngModel]="minComplexity">
+  </mat-form-field>
+
+    <mat-form-field class="searchfield">
+    <mat-label>Min. Playtime</mat-label>
+    <input matInput type="number" [ngModel]="minPlaytime">
+  </mat-form-field>
+
+    <mat-form-field class="searchfield">
+    <mat-label>Max. Playtime</mat-label>
+    <input matInput type="number" [ngModel]="maxPlaytime">
+  </mat-form-field>
+  -->
+
+
+
 </div>

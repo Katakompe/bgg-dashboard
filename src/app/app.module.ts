@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { BggService } from './bgg.service';
 import { RetryInterceptor } from './retry-interceptor';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import { FilterComponent } from './filter/filter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { RecommendedPlayerPipe } from './pipe/recommended-player-pipe';
 
 
@@ -28,11 +30,14 @@ import { RecommendedPlayerPipe } from './pipe/recommended-player-pipe';
     HttpClientModule,
     MatInputModule,
     MatTableModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
     MatSortModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     BggService,

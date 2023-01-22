@@ -22,9 +22,29 @@ boardgame-table {
 }
 
 .header-line {
-  margin: 8px;
+  margin: 8px 16px;
 }
 
 .filter {
   margin: 8px 0;
+}
+
+.user-header-line {
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button {
+  margin-left: 16px;
+}
+
+.user {
+  margin-left: 16px;
+}
+
+.header-card {
+  margin: 16px 0px;
+}
+.table-card {
+  margin-left: 16px;
 }

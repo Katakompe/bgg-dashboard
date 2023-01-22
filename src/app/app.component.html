@@ -1,63 +1,94 @@
-<div class="header-line mat-headline-3">
-  Collection of {{username}}
-</div>
+<div class="body">
 
-<app-filter [boardgames]="boardgames" (boardgameChange)="updateBoardGameView($event)"></app-filter>
-
-<div class="gametable">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="thumbnailImage">
-      <mat-header-cell class="thumbnail-cell" *matHeaderCellDef> Erscheinungsjahr </mat-header-cell>
-      <mat-cell class="thumbnail-cell" *matCellDef="let element"><img class="thumbnail-image mat-elevation-z8" src="{{element.thumbnailImage}}"></mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <a href="https://boardgamegeek.com/boardgame/{{element.id}}">{{element.id}}</a> </mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="players">
-      <mat-header-cell *matHeaderCellDef> Spieler </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <div class="playercell">
-          <div> {{element.minplayers >= element.maxplayers ? element.minplayers : element.minplayers+"-"+element.maxplayers}} </div>
-          <div class="mat-small"> {{element.recommendedPlayers | recommendedPlayer}} </div>
+  <mat-card class="header-card">
+    <mat-card-content>
+      <div class="header-line mat-headline-3">
+        Collection of {{username}}
       </div>
-      </mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="playtime">
-      <mat-header-cell *matHeaderCellDef> Spielzeit </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.minplaytime >= element.maxplaytime ? element.minplaytime : element.minplaytime+"-"+element.maxplaytime}} min </mat-cell>
-    </ng-container>
+      <div class="user-header-line align-items-stretch">
+        <form [formGroup]="usernameFormControlGroup" (ngSubmit)="updateCollection()">
+        <mat-form-field class="user">
+          <mat-label>Change User</mat-label>
+          <input matInput type="text" placeholder="Username" formControlName="usernameFormControl"/>
+        </mat-form-field>
+        <button class="submit-button"mat-raised-button color="primary" type="submit">Update</button>
+      </form>
+      </div>
 
-    <ng-container matColumnDef="publicationYear">
-      <mat-header-cell *matHeaderCellDef> Erscheinungsjahr </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.publicationYear}} </mat-cell>
-    </ng-container>
+    </mat-card-content>
+  </mat-card>
 
-    <ng-container matColumnDef="rating">
-      <mat-header-cell *matHeaderCellDef> Rating (1-10) </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="complexity">
-      <mat-header-cell *matHeaderCellDef> Komplexität(1-5) </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.complexity}} </mat-cell>
-    </ng-container>
+  <mat-card >
+    <mat-card-content>
+      <div class="header-line mat-headline-5">Filter</div>
+      <app-filter [boardgames]="boardgames" (boardgameChange)="updateBoardGameView($event)"></app-filter>
+      <div class="gametable">
+        <mat-table  matSort [dataSource]="dataSource" (matSortChange)="sortGames($event)">
+          <ng-container matColumnDef="thumbnailImage">
+            <mat-header-cell class="thumbnail-cell" *matHeaderCellDef> Erscheinungsjahr </mat-header-cell>
+            <mat-cell class="thumbnail-cell" *matCellDef="let element"><img class="thumbnail-image mat-elevation-z8"
+                src="{{element.thumbnailImage}}"></mat-cell>
+          </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <a
+                href="https://boardgamegeek.com/boardgame/{{element.id}}">{{element.id}}</a> <button mat-button
+                (click)="log(element)">Log</button> </mat-cell>
+          </ng-container>
 
-  </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 200]"
-  showFirstLastButtons
-  aria-label="Select page of games">
-</mat-paginator>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="players">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Spieler </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div class="playercell">
+                <div> {{element.minplayers >= element.maxplayers ? element.minplayers :
+                  element.minplayers+"-"+element.maxplayers}} </div>
+                <div class="mat-small"> {{element.recommendedPlayers | recommendedPlayer}} </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="playtime">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Spielzeit </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.minplaytime >= element.maxplaytime ? element.minplaytime :
+              element.minplaytime+"-"+element.maxplaytime}} min </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="publicationYear">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Erscheinungsjahr </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.publicationYear}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="rating">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Rating (1-10) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="complexity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Komplexität(1-5) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.complexity}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 200]" showFirstLastButtons aria-label="Select page of games">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

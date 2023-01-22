@@ -2,3 +2,175 @@
 
 @include mat.core();
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '@angular/material/theming';
+
+/* For use in src/lib/core/theming/_palette.scss */
+
+$md-primary: (
+    50 : #e8eceb,
+    100 : #c5d0cc,
+    200 : #9eb1aa,
+    300 : #779188,
+    400 : #597a6f,
+    500 : #3c6255,
+    600 : #365a4e,
+    700 : #2e5044,
+    800 : #27463b,
+    900 : #1a342a,
+    A100 : #78ffca,
+    A200 : #45ffb6,
+    A400 : #12ffa2,
+    A700 : #00f797,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-secondary: (
+    50 : #ecf1ee,
+    100 : #d0dbd4,
+    200 : #b0c3b7,
+    300 : #90ab9a,
+    400 : #799984,
+    500 : #61876e,
+    600 : #597f66,
+    700 : #4f745b,
+    800 : #456a51,
+    900 : #33573f,
+    A100 : #a7ffc3,
+    A200 : #74ffa0,
+    A400 : #41ff7d,
+    A700 : #28ff6c,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-third: (
+    50 : #f4f7f1,
+    100 : #e4ebdd,
+    200 : #d3ddc6,
+    300 : #c1cfaf,
+    400 : #b3c59e,
+    500 : #a6bb8d,
+    600 : #9eb585,
+    700 : #95ac7a,
+    800 : #8ba470,
+    900 : #7b965d,
+    A100 : #ffffff,
+    A200 : #e8ffcf,
+    A400 : #cfff9c,
+    A700 : #c3ff83,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-background: (
+    50 : #fcfcf6,
+    100 : #f9f8e8,
+    200 : #f5f3d8,
+    300 : #f0eec8,
+    400 : #edebbd,
+    500 : #eae7b1,
+    600 : #e7e4aa,
+    700 : #e4e0a1,
+    800 : #e1dd98,
+    900 : #dbd788,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #fffeeb,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+// mandatory stuff for theming
+$bv-palette-primary: mat.define-palette($md-primary);
+$bv-palette-accent:  mat.define-palette($md-secondary);
+
+// include the custom theme components into a theme object
+$bv-theme: mat-light-theme($bv-palette-primary, $bv-palette-accent);
+
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $bv-palette-primary,
+   accent: $bv-palette-accent
+    ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($my-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+//@include mat.button-theme($my-theme);
+
+
+@include mat.all-component-themes($my-theme);
+
+
+html {
+  background-color: map-get($md-background, 200);
+}
+
